@@ -291,6 +291,9 @@ class acf_field_businesshours extends acf_field {
 		*/
 		
 		// perhaps use $field['preview_size'] to alter the $value?
+		?>
+		opening hours
+		<?php
 		
 		
 		// Note: This function can be removed if not used

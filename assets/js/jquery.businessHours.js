@@ -102,7 +102,7 @@
                 }
             },
             init: function(opts) {
-                this.options = $.extend(defaults, opts);
+                this.options = $.extend({}, defaults, opts);
                 $container.html("");
 
                 if(typeof this.options.preInit === "function") {
@@ -152,7 +152,7 @@
 
                 $.each(options.weekdays, function(pos, weekday) {
                     // populate form
-                    var day = options.operationTime[pos];
+                    var day = options.operationTime[pos] || defaults.operationTime[pos];
                     var $operationDayNode = $container.find('.dayContainer').eq(pos);
                     $operationDayNode.find('.weekday').html(weekday);
 
