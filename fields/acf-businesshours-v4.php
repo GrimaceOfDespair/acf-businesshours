@@ -12,7 +12,8 @@ class acf_field_businesshours extends acf_field {
 	
 	// vars
 	var $settings, // will hold info such as dir / path
-		$defaults; // will hold default field options
+		$defaults, // will hold default field options
+		$days; // will hold all day abbreviations
 		
 		
 	/*
@@ -35,16 +36,11 @@ class acf_field_businesshours extends acf_field {
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
 			//'preview_size' => 'thumbnail'
 		);
-		$this->l10n = array(
-			'Mon'	=>	__("Mon",'acf-businesshours'),
-			'Tue'	=>	__("Tue",'acf-businesshours'),
-			'Wed'	=>	__("Wed",'acf-businesshours'),
-			'Thu'	=>	__("Thu",'acf-businesshours'),
-			'Fri'	=>	__("Fri",'acf-businesshours'),
-			'Sat'	=>	__("Sat",'acf-businesshours'),
-			'Sun'	=>	__("Sun",'acf-businesshours'),
-		);
-		
+		$this->days = array("Mon","Tue","Wed","Thu","Fri","Sat","Sun");
+		$this->l10n = array();
+		foreach ($this->days as $day) {
+			$this->l10n[$day] = __($day,'acf-businesshours');
+		}
 		
 		// do not delete!
     	parent::__construct();
@@ -291,13 +287,38 @@ class acf_field_businesshours extends acf_field {
 		*/
 		
 		// perhaps use $field['preview_size'] to alter the $value?
-		?>
-		opening hours
-		<?php
+		$businessHours = @json_decode($value);
+		if ($businessHours === null && json_last_error() !== JSON_ERROR_NONE) {
+				echo "";
+		}
 		
+		$formattedValue = '';
+		$i = 0;
+		
+		foreach ($businessHours as $day) {
+			
+			if (!$day->isActive || !$day->times) {
+				continue;
+			}
+			
+			$dayAbbr = $this->days[$i++];
+			$dayString = $this->l10n[$dayAbbr];
+			
+			$formattedValue .= "<p class='day'><label>$dayString</label> ";
+			
+			foreach ($day->times as $time) {
+				
+				$start = $time->start;
+				$end = $time->end;
+				
+				$formattedValue .= "<span class='time'>$start&ndash;$end</span> ";
+			}
+			
+			$formattedValue .= "</p>";
+		}
 		
 		// Note: This function can be removed if not used
-		return $value;
+		return $formattedValue;
 	}
 	
 	
