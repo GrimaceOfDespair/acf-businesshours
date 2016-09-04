@@ -77,7 +77,7 @@
               
                 $time = $operationTimes.eq(index);
                 if (!$time.length) {
-                  $template = $operationTimes.eq(0);
+                  $template = $operationTimes.last();
                   $time = $template.clone().insertAfter($template);
                 }
                 
@@ -123,17 +123,21 @@
                         $container.find('.operationState').each(function(num, item) {
                             var isWorkingDay = $(item).prop('checked');
                             var $dayContainer = $(item).parents('.dayContainer');
+                            var times = null;
+                            if (isWorkingDay) {
+                              times = $.makeArray($dayContainer
+                                .find('.operationTime')
+                                .map(function(i, el) {
+                                  return {
+                                    start: $('[name="startTime"]', el).val(),
+                                    end: $('[name="endTime"]', el).val()
+                                  }
+                                }));
+                            }
 
                             data.push({
                                 isActive: isWorkingDay,
-                                times : !isWorkingDay ? null : $dayContainer
-                                  .find('.operationTime')
-                                  .map(function(i, el) {
-                                    return {
-                                      start: $('[name="startTime"]', el).val(),
-                                      end: $('[name="endTime"]', el).val()
-                                    }
-                                  })
+                                times : times
                             });
                         });
 
@@ -165,6 +169,10 @@
                         $this.initOperationTime($operationTimes, 0, {});
                     } else {
                         for (var i=0; i < day.times.length; i++) {
+                            // Update operationTimes after first loop
+                            if (i > 0) {
+                              $operationTimes = $operationDayNode.find('.operationTime');
+                            }
                             $this.initOperationTime($operationTimes, i, day.times[i]);
                         }
                     }
