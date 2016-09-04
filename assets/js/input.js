@@ -3,8 +3,30 @@
 	
 	function initialize_field( $el ) {
 		
-		//$el.doStuff();
+		var $businessHours = $el.find(".businesshours");
+		var $dataField = $el.find("input");
+    
+    var data;
+    try {
+      data = JSON.parse($dataField.val());
+    } catch(e) {
+      data = {};
+    }
 		
+		var businessHoursManager = $businessHours.businessHours({
+      operationTime: data,
+			postInit: function(){
+				
+				$('.operationTimeFrom, .operationTimeTill').timepicker({
+					timeFormat: 'H:i',
+					step: 15,
+				});
+			},
+		});
+		
+		$businessHours.on('sync', function() {
+			$dataField.val(JSON.stringify(businessHoursManager.serialize()));
+		});
 	}
 	
 	
@@ -26,8 +48,8 @@
 		
 		acf.add_action('ready append', function( $el ){
 			
-			// search $el for fields of type 'FIELD_NAME'
-			acf.get_fields({ type : 'FIELD_NAME'}, $el).each(function(){
+			// search $el for fields of type 'businesshours'
+			acf.get_fields({ type : 'businesshours'}, $el).each(function(){
 				
 				initialize_field( $(this) );
 				
@@ -35,6 +57,18 @@
 			
 		});
 		
+		acf.add_action('sortstart', function( $el ){
+			
+			// $el will be equivalent to the new element being moved $('tr.row')
+			
+			
+			// find a specific field
+			var $field = $el.find('#my-wrapper-id');
+			
+			
+			// do something to $field
+			
+		});
 		
 	} else {
 		
@@ -56,15 +90,19 @@
 		
 		$(document).on('acf/setup_fields', function(e, postbox){
 			
-			$(postbox).find('.field[data-field_type="FIELD_NAME"]').each(function(){
+			$(postbox).find('.field[data-field_type="businesshours"]').each(function(){
 				
 				initialize_field( $(this) );
 				
 			});
 		
 		});
-	
-	
+		
+    $(document).on('submit', '#post', function() {
+      
+      $('.businesshours').trigger('sync');
+      
+    })	
 	}
 
 

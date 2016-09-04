@@ -5,10 +5,10 @@ if( ! defined( 'ABSPATH' ) ) exit;
 
 
 // check if class already exists
-if( !class_exists('acf_field_FIELD_NAME') ) :
+if( !class_exists('acf_field_businesshours') ) :
 
 
-class acf_field_FIELD_NAME extends acf_field {
+class acf_field_businesshours extends acf_field {
 	
 	// vars
 	var $settings, // will hold info such as dir / path
@@ -27,9 +27,9 @@ class acf_field_FIELD_NAME extends acf_field {
 	function __construct( $settings )
 	{
 		// vars
-		$this->name = 'FIELD_NAME';
-		$this->label = __('FIELD_LABEL');
-		$this->category = __("Basic",'acf'); // Basic, Content, Choice, etc
+		$this->name = 'businesshours';
+		$this->label = __('Business hours');
+		$this->category = __("jQuery",'acf'); // Basic, Content, Choice, etc
 		$this->defaults = array(
 			// add default here to merge into your field. 
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
@@ -47,57 +47,6 @@ class acf_field_FIELD_NAME extends acf_field {
 	}
 	
 	
-	/*
-	*  create_options()
-	*
-	*  Create extra options for your field. This is rendered when editing a field.
-	*  The value of $field['name'] can be used (like below) to save extra data to the $field
-	*
-	*  @type	action
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$field	- an array holding all the field's data
-	*/
-	
-	function create_options( $field )
-	{
-		// defaults?
-		/*
-		$field = array_merge($this->defaults, $field);
-		*/
-		
-		// key is needed in the field names to correctly save the data
-		$key = $field['name'];
-		
-		
-		// Create Field Options HTML
-		?>
-<tr class="field_option field_option_<?php echo $this->name; ?>">
-	<td class="label">
-		<label><?php _e("Preview Size",'acf'); ?></label>
-		<p class="description"><?php _e("Thumbnail is advised",'acf'); ?></p>
-	</td>
-	<td>
-		<?php
-		
-		do_action('acf/create_field', array(
-			'type'		=>	'radio',
-			'name'		=>	'fields['.$key.'][preview_size]',
-			'value'		=>	$field['preview_size'],
-			'layout'	=>	'horizontal',
-			'choices'	=>	array(
-				'thumbnail' => __('Thumbnail'),
-				'something_else' => __('Something Else'),
-			)
-		));
-		
-		?>
-	</td>
-</tr>
-		<?php
-		
-	}
 	
 	
 	/*
@@ -114,20 +63,25 @@ class acf_field_FIELD_NAME extends acf_field {
 	
 	function create_field( $field )
 	{
-		// defaults?
-		/*
-		$field = array_merge($this->defaults, $field);
-		*/
-		
-		// perhaps use $field['preview_size'] to alter the markup?
+		// vars
+		$o = array( 'id', 'name', 'value' );
+		$e = '';
 		
 		
-		// create Field HTML
-		?>
-		<div>
-			
-		</div>
-		<?php
+		$e .= '<div class="acf-input-wrap">';
+		$e .= '<input type="hidden"';
+		
+		foreach( $o as $k )
+		{
+			$e .= ' ' . $k . '="' . esc_attr( $field[ $k ] ) . '"';	
+		}
+		
+		$e .= ' /><div class="businesshours"></div>';
+		$e .= '</div>';
+		
+		
+		// return
+		echo $e;
 	}
 	
 	
@@ -154,13 +108,21 @@ class acf_field_FIELD_NAME extends acf_field {
 		
 		
 		// register & include JS
-		wp_register_script( 'acf-input-FIELD_NAME', "{$url}assets/js/input.js", array('acf-input'), $version );
-		wp_enqueue_script('acf-input-FIELD_NAME');
+		wp_register_script( 'acf-input-businesshours', "{$url}assets/js/input.js", array('acf-input'), $version );
+		wp_enqueue_script('acf-input-businesshours');
+		wp_register_script( 'jquery.businesshours', "{$url}assets/js/jquery.businessHours.js", array('acf-input', 'jquery'), $version );
+		wp_enqueue_script('jquery.businesshours');
+		wp_register_script( 'jquery.timepicker', "{$url}assets/js/jquery.timepicker.min.js", array('acf-input', 'jquery'), $version );
+		wp_enqueue_script('jquery.timepicker');
 		
 		
 		// register & include CSS
-		wp_register_style( 'acf-input-FIELD_NAME', "{$url}assets/css/input.css", array('acf-input'), $version );
-		wp_enqueue_style('acf-input-FIELD_NAME');
+		wp_register_style( 'acf-input-businesshours', "{$url}assets/css/input.css", array('acf-input'), $version );
+		wp_enqueue_style('acf-input-businesshours');
+		wp_register_style( 'jquery.businesshours', "{$url}assets/css/jquery.businessHours.css", array('acf-input'), $version );
+		wp_enqueue_style('jquery.businesshours');
+		wp_register_style( 'jquery.timepicker', "{$url}assets/css/jquery.timepicker.css", array('acf-input'), $version );
+		wp_enqueue_style('jquery.timepicker');
 		
 	}
 	
@@ -373,7 +335,7 @@ class acf_field_FIELD_NAME extends acf_field {
 
 
 // initialize
-new acf_field_FIELD_NAME( $this->settings );
+new acf_field_businesshours( $this->settings );
 
 
 // class_exists check

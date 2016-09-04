@@ -13,28 +13,28 @@ http://www.advancedcustomfields.com/resources/tutorials/creating-a-new-field-typ
 * `/assets/images`: folder for image files
 * `/assets/js`: folder for .js files
 * `/fields`:  folder for all field class files.
-* `/fields/FIELD_NAME-v5.php`: Field class compatible with ACF version 5 
-* `/fields/FIELD_NAME-v4.php`: Field class compatible with ACF version 4
+* `/fields/businesshours-v5.php`: Field class compatible with ACF version 5 
+* `/fields/businesshours-v4.php`: Field class compatible with ACF version 4
 * `/lang`: folder for .pot, .po and .mo files
-* `acf-FIELD_NAME.php`: Main plugin file that includes the correct field file based on the ACF version
+* `acf-businesshours.php`: Main plugin file that includes the correct field file based on the ACF version
 * `readme.txt`: WordPress readme file to be used by the WordPress repository
 
 ### step 1.
 
-This template uses `PLACEHOLDERS` such as `FIELD_NAME` throughout the file names and code. Use the following list of placeholders to do a 'find and replace':
+This template uses `PLACEHOLDERS` such as `businesshours` throughout the file names and code. Use the following list of placeholders to do a 'find and replace':
 
-* `FIELD_NAME`: Single word, no spaces. Underscores allowed. eg. donate_button
-* `FIELD_LABEL`: Multiple words, can include spaces, visible when selecting a field type. eg. Donate Button
-* `PLUGIN_URL`: Url to the github or WordPress repository
-* `PLUGIN_TAGS`: Comma separated list of relevant tags
-* `SHORT_DESCRIPTION`: Brief description of the field type, no longer than 2 lines
-* `EXTENDED_DESCRIPTION`: Extended description of the field type
-* `AUTHOR_NAME`: Name of field type author
-* `AUTHOR_URL`: URL to author's website
+* `businesshours`: Single word, no spaces. Underscores allowed. eg. donate_button
+* `Business hours`: Multiple words, can include spaces, visible when selecting a field type. eg. Donate Button
+* `http://www.bithive.be/`: Url to the github or WordPress repository
+* `jQuery, ACF`: Comma separated list of relevant tags
+* `ACF field to edit business hours`: Brief description of the field type, no longer than 2 lines
+* `With this ACF extension you can edit business hours in a user friendly way`: Extended description of the field type
+* `Igor Kalders`: Name of field type author
+* `http://www.bithive.be`: URL to author's website
 
 ### step 2.
 
-Edit the `FIELD_NAME-v5.php` and `FIELD_NAME-v4.php` files (now renamed using your field name) and include your custom code in the appropriate functions. 
+Edit the `businesshours-v5.php` and `businesshours-v4.php` files (now renamed using your field name) and include your custom code in the appropriate functions. 
 Please note that v4 and v5 field classes have slightly different functions. For more information, please read:
 * http://www.advancedcustomfields.com/resources/tutorials/creating-a-new-field-type/
 
@@ -44,15 +44,15 @@ Edit this `README.md` file with the appropriate information and delete all conte
 
 -----------------------
 
-# ACF FIELD_LABEL Field
+# ACF Business hours Field
 
-SHORT_DESCRIPTION
+ACF field to edit business hours
 
 -----------------------
 
 ### Description
 
-EXTENDED_DESCRIPTION
+With this ACF extension you can edit business hours in a user friendly way
 
 ### Compatibility
 
@@ -62,9 +62,9 @@ This ACF field type is compatible with:
 
 ### Installation
 
-1. Copy the `acf-FIELD_NAME` folder into your `wp-content/plugins` folder
-2. Activate the FIELD_LABEL plugin via the plugins admin page
-3. Create a new field via ACF and select the FIELD_LABEL type
+1. Copy the `acf-businesshours` folder into your `wp-content/plugins` folder
+2. Activate the Business hours plugin via the plugins admin page
+3. Create a new field via ACF and select the Business hours type
 4. Please refer to the description for more info regarding the field type settings
 
 ### Changelog
