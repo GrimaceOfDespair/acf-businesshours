@@ -35,6 +35,15 @@ class acf_field_businesshours extends acf_field {
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
 			//'preview_size' => 'thumbnail'
 		);
+		$this->l10n = array(
+			'Mon'	=>	__("Mon",'acf-businesshours'),
+			'Tue'	=>	__("Tue",'acf-businesshours'),
+			'Wed'	=>	__("Wed",'acf-businesshours'),
+			'Thu'	=>	__("Thu",'acf-businesshours'),
+			'Fri'	=>	__("Fri",'acf-businesshours'),
+			'Sat'	=>	__("Sat",'acf-businesshours'),
+			'Sun'	=>	__("Sun",'acf-businesshours'),
+		);
 		
 		
 		// do not delete!

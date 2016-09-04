@@ -15,6 +15,15 @@
 		
 		var businessHoursManager = $businessHours.businessHours({
       operationTime: data,
+			weekdays: [
+				acf.l10n.businesshours.Mon,
+				acf.l10n.businesshours.Tue,
+				acf.l10n.businesshours.Wed,
+				acf.l10n.businesshours.Thu,
+				acf.l10n.businesshours.Fri,
+				acf.l10n.businesshours.Sat,
+				acf.l10n.businesshours.Sun,
+			],
 			postCreateTime: function($time){
 				
 				$('input', $time).timepicker({

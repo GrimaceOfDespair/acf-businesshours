@@ -16,7 +16,6 @@ With this ACF extension you can edit business hours in a user friendly way
 = Compatibility =
 
 This ACF field type is compatible with:
-* ACF 5
 * ACF 4
 
 == Installation ==
