@@ -15,9 +15,9 @@
 		
 		var businessHoursManager = $businessHours.businessHours({
       operationTime: data,
-			postInit: function(){
+			postCreateTime: function($time){
 				
-				$('.operationTimeFrom, .operationTimeTill').timepicker({
+				$('input', $time).timepicker({
 					timeFormat: 'H:i',
 					step: 15,
 				});
