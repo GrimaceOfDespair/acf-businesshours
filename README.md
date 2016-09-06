@@ -29,7 +29,9 @@ The result looks like this:
 
 ![Screenshot](images/screenshot.png "Screenshot")
 
-For now, there's no front end UI.
+Output is html, which can be styled like this:
+
+![Screenshot](images/screenshot2.png "Screenshot")
 
 ### Compatibility
 
